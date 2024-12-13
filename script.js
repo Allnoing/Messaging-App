@@ -9,14 +9,14 @@ document.getElementById("login-form").addEventListener("submit", function (event
     document.getElementById("login-page").style.display = "none";
     document.getElementById("chat-page").style.display = "flex";
 
-    // Log the user's login for debugging; you may replace this with backend login logic later
+    // Log the user's login for debugging; (replace this with backend login logic later)
     console.log(`User logged in as: ${username}`);
 });
 
 // Handle Sending Messages
 document.getElementById("send-button").addEventListener("click", function () {
     const messageInput = document.getElementById("message-input");
-    const message = messageInput.value.trim(); // Remove whitespace from the message
+    const message = messageInput.value.trim(); // Removes whitespace from the message
 
     if (message !== "") {
         // Grab the chat messages container
@@ -52,7 +52,7 @@ function addFriend() {
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
         removeButton.addEventListener("click", function () {
-            friendsList.removeChild(friendItem); // Remove the friend from the list
+            friendsList.removeChild(friendItem); // Removes the friend from the list
         });
 
         // Append the friend's name and remove button to the list item
