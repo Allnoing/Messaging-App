@@ -78,8 +78,57 @@ function sendMessage() {
 
         // Clear the input field for the next message
         messageInput.value = "";
+
+        // Simulates a reply after 3 seconds
+        setTimeout(() => simulateReply(currentFriend), 3000);
     }
 }
+
+// Function to generate a reply based on the user's message
+function generateReply(userMessage) {
+    // Converts the message to lowercase for easier matching
+    const lowerMessage = userMessage.toLowerCase();
+
+    if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
+        return "Hey there! How can I help you?";
+    } else if (lowerMessage.includes("how are you")) {
+        return "I'm just a chatbot, but I'm doing great! How about you?";
+    } else if (lowerMessage.includes("thanks") || lowerMessage.includes("thank you")) {
+        return "You're welcome!";
+    } else if (lowerMessage.includes("bye")) {
+        return "Goodbye! Have a great day!";
+    } else {
+        // Default fallback response
+        return "That's interesting! Tell me more.";
+    }
+}
+
+// Simulate a reply using the generateReply function
+function simulateReply(friendName) {
+    const chatMessages = document.getElementById("chat-messages");
+
+    // Get the last message sent by the user
+    const lastMessage = conversations[friendName]?.slice(-1)[0]?.content || "";
+
+    // Generate a dynamic reply based on the last message
+    const reply = generateReply(lastMessage);
+
+    // Add the reply to the conversation
+    if (!conversations[friendName]) {
+        conversations[friendName] = [];
+    }
+    conversations[friendName].push({ sender: "friend", content: reply });
+
+    // Display the reply in the chat area
+    const replyDiv = document.createElement("div");
+    replyDiv.textContent = reply;
+    replyDiv.classList.add("message-received");
+    chatMessages.appendChild(replyDiv);
+
+    // Scroll to the bottom of the chat area
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 
 // click event listener for the send button
 document.getElementById("send-button").addEventListener("click", sendMessage);

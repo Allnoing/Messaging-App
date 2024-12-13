@@ -90,7 +90,7 @@ button {
 
 /* Message Styling */
 .message-sent {
-    align-self: flex-start;
+    align-self: flex-end;
     background-color: #007bff;
     color: white;
     padding: 10px;
