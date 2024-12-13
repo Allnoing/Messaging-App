@@ -1,0 +1,141 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+
+/* Login Page */
+#login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: rgb(160,103,171);
+    background: linear-gradient(90deg, rgba(160,103,171,1) 0%, rgba(93,74,172,1) 41%, rgba(0,212,255,1) 100%);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+    opacity: 0.4; /* 50% transparent */
+    border-style: solid;
+    border-width: 2px; 
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Main Chat Page */
+#chat-page {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar {
+    width: 20%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+#chat-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 10px;
+}
+
+
+/* Friends List */
+#friends-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#friends-list li {
+    padding: 10px;
+    background-color: #444;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#friends-list li span {
+    color: white;
+}
+
+#friends-list li button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#friend-actions {
+    margin-top: 10px;
+    display: flex;
+    column-gap: 20px; /* spacing between the input and button (Still not working come back to this)*/
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#friend-name {
+    padding: 10px;
+    flex-grow: 1; /* Ensures the input takes up remaining space */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#add-friend {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    gap: 20px;
+}
