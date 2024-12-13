@@ -13,22 +13,82 @@ document.getElementById("login-form").addEventListener("submit", function (event
     console.log(`User logged in as: ${username}`);
 });
 
-// Handle Sending Messages
-document.getElementById("send-button").addEventListener("click", function () {
+// placeholder conversations object for storing messages per friend
+const conversations = {};
+
+// Load Conversation for selected friend
+function loadConversation(friendName) {
+    const chatTitle = document.getElementById("chat-title");
+    const chatMessages = document.getElementById("chat-messages");
+
+    // Update chat title
+    chatTitle.textContent = `chatting with ${friendName}`;
+
+    // Clear previous messages in the chat area
+    chatMessages.innerHTML = "";
+
+    // Load messsages for the selected friend
+    const messages = conversations[friendName] || [];
+    messages.forEach((msg) => {
+        const messageDiv = document.createElement("div");
+        messageDiv.textContent = msg.content;
+
+        // Style message sent validation based on sender
+        if (msg.sender === "me") {
+            messageDiv.classList.add("message-sent");
+        } else {
+            messageDiv.classList.add("message-recieved");
+        }
+
+        chatMessages.appendChild(messageDiv);
+    });
+
+    // Scorll to the bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight
+}
+
+
+// Function to handle sending messages
+function sendMessage() {
     const messageInput = document.getElementById("message-input");
-    const message = messageInput.value.trim(); // Removes whitespace from the message
+    const message = messageInput.value.trim(); // Remove whitespace
+    const chatTitle = document.getElementById("chat-title").textContent;
 
-    if (message !== "") {
-        // Grab the chat messages container
+    // Get the current friend from the chat title
+    const currentFriend = chatTitle.replace("Chatting with ", "");
+
+    if (message !== "" && currentFriend) {
+        // If there's no conversation for the current friend, create one
+        if (!conversations[currentFriend]) {
+            conversations[currentFriend] = [];
+        }
+
+        // Add the message to the conversation
+        conversations[currentFriend].push({ sender: "me", content: message });
+
+        // Display the message in the chat area
         const chatMessages = document.getElementById("chat-messages");
+        const messageDiv = document.createElement("div");
+        messageDiv.textContent = message;
+        messageDiv.classList.add("message-sent");
+        chatMessages.appendChild(messageDiv);
 
-        // Create a new message element and append the user's message
-        const newMessage = document.createElement("div");
-        newMessage.textContent = message;
-        chatMessages.appendChild(newMessage);
+        // Scroll to the bottom of the chat area
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
         // Clear the input field for the next message
         messageInput.value = "";
+    }
+}
+
+// click event listener for the send button
+document.getElementById("send-button").addEventListener("click", sendMessage);
+
+// keydown event listener for the Enter key
+document.getElementById("message-input").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent default Enter behavior
+        sendMessage(); // Call the sendMessage function
     }
 });
 
