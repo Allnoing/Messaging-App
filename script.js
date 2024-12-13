@@ -15,9 +15,9 @@ document.getElementById("login-form").addEventListener("submit", function (event
 // Handle Sending Messages
 document.getElementById("send-button").addEventListener("click", function () {
     const messageInput = document.getElementById("message-input");
-    const message = messageInput.value;
+    const message = messageInput.value.trim();
 
-    if (message.trim() !== "") {
+    if (message !== "") {
         // Add message to chat
         const chatMessages = document.getElementById("chat-messages");
         const newMessage = document.createElement("div");
@@ -29,8 +29,8 @@ document.getElementById("send-button").addEventListener("click", function () {
     }
 });
 
-// Add a Friend
-document.getElementById("add-friend").addEventListener("click", function () {
+// Add a Friend Function
+function addFriend() {
     const friendNameInput = document.getElementById("friend-name");
     const friendName = friendNameInput.value.trim();
 
@@ -59,5 +59,19 @@ document.getElementById("add-friend").addEventListener("click", function () {
 
         // Clear input
         friendNameInput.value = "";
+    } else {
+        console.log("Invalid name. Try again.");
+    }
+}
+
+// Add Friend on Button Click
+document.getElementById("add-friend").addEventListener("click", addFriend);
+
+// Add Friend on Enter Key
+document.getElementById("friend-name").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent default Enter behavior
+        addFriend(); // Call the addFriend function
     }
 });
+
