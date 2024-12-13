@@ -98,6 +98,7 @@ button {
     margin: 5px 0;
     display: inline-block;
     max-width: 70%;
+    text-align: right;
 }
 
 .message-received {
@@ -109,6 +110,7 @@ button {
     margin: 5px 0;
     display: inline-block;
     max-width: 70%;
+    text-align: left;
 }
 
 /* Friends List */

@@ -79,28 +79,76 @@ function sendMessage() {
         // Clear the input field for the next message
         messageInput.value = "";
 
-        // Simulates a reply after 3 seconds
-        setTimeout(() => simulateReply(currentFriend), 3000);
+        // Simulates a reply after 2 seconds
+        setTimeout(() => simulateReply(currentFriend), 2000);
     }
+}
+
+// Lookup object to map keywords to response templates
+const replyTemplates = {
+    greetings: {
+        keywords: ["hello", "hi", "wassup", "sup", "hey"],
+        responses: [
+            "Hey there! How's it going?",
+            "Hi! What's up?",
+            "Hello! How can I help you today?",
+        ],
+    },
+    howAreYou: {
+        keywords: ["how are you", "how are you doing"],
+        responses: [
+            "I'm just a bunch of code, but thanks for asking! How about you?",
+            "Doing great! And yourself?",
+            "I'm fantastic! What's new with you?",
+        ],
+    },
+    thankYou: {
+        keywords: ["thank you", "thanks"],
+        responses: [
+            "You're welcome! Let me know if you need anything else.",
+            "No problem at all!",
+            "Happy to help!",
+        ],
+    },
+    goodbyes: {
+        keywords: ["bye", "see you", "see ya", "goodbye", "farewell"],
+        responses: [
+            "Goodbye! Have a great day!",
+            "See you later!",
+            "Take care! Talk to you soon.",
+        ],
+    },
+    fallback: {
+        keywords: [],
+        responses: [
+            "That's interesting! Can you tell me more?",
+            "Hmm, I’d love to hear more about that.",
+            "Oh wow! What else?",
+        ],
+    },
+};
+
+// Utility function to pick a random response from the array
+function pickRandom(array) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
 }
 
 // Function to generate a reply based on the user's message
 function generateReply(userMessage) {
-    // Converts the message to lowercase for easier matching
-    const lowerMessage = userMessage.toLowerCase();
+    const lowerMessage = userMessage.toLowerCase(); // Normalize the input
 
-    if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
-        return "Hey there! How can I help you?";
-    } else if (lowerMessage.includes("how are you")) {
-        return "I'm just a chatbot, but I'm doing great! How about you?";
-    } else if (lowerMessage.includes("thanks") || lowerMessage.includes("thank you")) {
-        return "You're welcome!";
-    } else if (lowerMessage.includes("bye")) {
-        return "Goodbye! Have a great day!";
-    } else {
-        // Default fallback response
-        return "That's interesting! Tell me more.";
+    // Loop that iterates through the lookup object to find matching keywords
+    for (const category in replyTemplates) {
+        const { keywords, responses } = replyTemplates[category];
+        if (keywords.some((keyword) => lowerMessage.includes(keyword))) {
+            // If a keyword matches, pick a random response from the corresponding category
+            return pickRandom(responses);
+        }
     }
+
+    // If no keywords match, use the fallback responses
+    return pickRandom(replyTemplates.fallback.responses);
 }
 
 // Simulate a reply using the generateReply function
@@ -110,7 +158,7 @@ function simulateReply(friendName) {
     // Get the last message sent by the user
     const lastMessage = conversations[friendName]?.slice(-1)[0]?.content || "";
 
-    // Generate a dynamic reply based on the last message
+    // Generate a reply based on the last message
     const reply = generateReply(lastMessage);
 
     // Add the reply to the conversation
@@ -125,7 +173,7 @@ function simulateReply(friendName) {
     replyDiv.classList.add("message-received");
     chatMessages.appendChild(replyDiv);
 
-    // Scroll to the bottom of the chat area
+    // Scroll to the bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
