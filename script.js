@@ -177,6 +177,19 @@ function simulateReply(friendName) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// Function to trigger pop animation on the Send button
+function triggerPopAnimation() {
+    const sendButton = document.getElementById("send-button");
+    
+    // Add the 'pop' class
+    sendButton.classList.add("pop");
+    
+    // Remove the 'pop' class after the animation ends
+    setTimeout(() => {
+        sendButton.classList.remove("pop");
+    }, 200); // Match the animation duration (0.2s)
+}
+
 
 // click event listener for the send button
 document.getElementById("send-button").addEventListener("click", sendMessage);
