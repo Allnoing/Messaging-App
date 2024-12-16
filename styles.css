@@ -184,6 +184,14 @@ button {
     }
 }
 
+/* Timestamp Styling */
+.timestamp {
+    font-size: 0.75rem; /* Smaller font size */
+    color: #666;
+    text-align: right;
+    margin-top: 3px; /* spacing between message and timestamp */
+}
+
 /* scroll bar styling for conversations */
 #chat-messages::-webkit-scrollbar {
     width: 8px;

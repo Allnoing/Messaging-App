@@ -47,6 +47,14 @@ function loadConversation(friendName) {
     chatMessages.scrollTop = chatMessages.scrollHeight
 }
 
+//  Function to get the current time in a readable format
+function getCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+}
+
 
 // Function to handle sending messages
 function sendMessage() {
@@ -58,19 +66,26 @@ function sendMessage() {
     const currentFriend = chatTitle.replace("Chatting with ", "");
 
     if (message !== "" && currentFriend) {
+        // Timestamp for messages
+        const Timestamp = getCurrentTime();
+
         // If there's no conversation for the current friend, create one
         if (!conversations[currentFriend]) {
             conversations[currentFriend] = [];
         }
 
         // Add the message to the conversation
-        conversations[currentFriend].push({ sender: "me", content: message });
+        conversations[currentFriend].push({ sender: "me", content: message, time: Timestamp });
 
         // Display the message in the chat area
         const chatMessages = document.getElementById("chat-messages");
         const messageDiv = document.createElement("div");
         messageDiv.textContent = message;
         messageDiv.classList.add("message-sent");
+        chatMessages.appendChild(messageDiv);
+
+        messageDiv.innerHTML = ` <div>${message}</div> <div class="timestamp">${Timestamp}</div> `;
+
         chatMessages.appendChild(messageDiv);
 
         // Scroll to the bottom of the chat area
@@ -161,6 +176,9 @@ function simulateReply(friendName) {
     // Generate a reply based on the last message
     const reply = generateReply(lastMessage);
 
+    // Timestamp for messages
+    const Timestamp = getCurrentTime();
+
     // Add the reply to the conversation
     if (!conversations[friendName]) {
         conversations[friendName] = [];
@@ -171,6 +189,10 @@ function simulateReply(friendName) {
     const replyDiv = document.createElement("div");
     replyDiv.textContent = reply;
     replyDiv.classList.add("message-received");
+
+     // reply content and timestamp
+     replyDiv.innerHTML = ` <div>${reply}</div> <div class="timestamp">${Timestamp}</div> `;
+
     chatMessages.appendChild(replyDiv);
 
     // Scroll to the bottom
