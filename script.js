@@ -189,40 +189,56 @@ document.getElementById("message-input").addEventListener("keydown", function (e
     }
 });
 
-// Add a Friend Function
+// Function to handle friend selection
+function selectFriend(event) {
+    // Get all the friend list items
+    const allFriends = document.querySelectorAll("#friends-list li span");
+
+    // Remove the active-friend class from all friends
+    allFriends.forEach((friend) => {
+        friend.classList.remove("active-friend");
+    });
+
+    // Add the active-friend class to the clicked friend
+    event.target.classList.add("active-friend");
+
+    // Update the chat title with the selected friend's name
+    const friendName = event.target.textContent;
+    document.getElementById("chat-title").textContent = `Chatting with ${friendName}`;
+}
+
+// Function to add a friend (with select functionality)
 function addFriend() {
     const friendNameInput = document.getElementById("friend-name");
-    const friendName = friendNameInput.value.trim(); // Get and sanitize the input value
+    const friendName = friendNameInput.value.trim();
 
     if (friendName !== "") {
         // Get the friends list container
         const friendsList = document.getElementById("friends-list");
-
-        // Create a new list item for the friend
         const friendItem = document.createElement("li");
 
-        // Add the friend's name inside a span for styling/structure
+        // Friend name (span for clickable element)
         const friendNameSpan = document.createElement("span");
         friendNameSpan.textContent = friendName;
 
-        // Add a "Remove" button next to the friend's name
+        // Add click event listener to select this friend
+        friendNameSpan.addEventListener("click", selectFriend);
+
+        // Remove button
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
         removeButton.addEventListener("click", function () {
-            friendsList.removeChild(friendItem); // Removes the friend from the list
+            friendsList.removeChild(friendItem);
         });
 
-        // Append the friend's name and remove button to the list item
+        // Append elements
         friendItem.appendChild(friendNameSpan);
         friendItem.appendChild(removeButton);
-
-        // Add the new friend to the friends list
         friendsList.appendChild(friendItem);
 
-        // Clear the input field for the next friend
+        // Clear input
         friendNameInput.value = "";
     } else {
-        // Debug log for invalid or empty input
         console.log("Invalid name. Try again.");
     }
 }
