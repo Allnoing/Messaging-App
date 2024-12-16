@@ -95,7 +95,7 @@ const replyTemplates = {
         ],
     },
     howAreYou: {
-        keywords: ["how are you", "how are you doing"],
+        keywords: ["how are you", "how are you doing", "what about you"],
         responses: [
             "I'm just a bunch of code, but thanks for asking! How about you?",
             "Doing great! And yourself?",

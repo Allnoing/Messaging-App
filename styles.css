@@ -93,24 +93,56 @@ button {
     align-self: flex-end;
     background-color: #007bff;
     color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 5px 0;
-    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 15px;
     max-width: 70%;
-    text-align: right;
+    word-wrap: break-word;
+    display: inline-block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .message-received {
     align-self: flex-start;
     background-color: #e5e5e5;
     color: black;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 5px 0;
-    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 15px;
     max-width: 70%;
-    text-align: left;
+    word-wrap: break-word;
+    display: inline-block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Slight upwards slide */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+/* scroll bar styling for conversations */
+#chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 /* Friends List */
