@@ -65,6 +65,8 @@ function sendMessage() {
     // Get the current friend from the chat title
     const currentFriend = chatTitle.replace("Chatting with ", "");
 
+    let sender = "me";
+
     if (message !== "" && currentFriend) {
         // Timestamp for messages
         const Timestamp = getCurrentTime();
@@ -86,6 +88,21 @@ function sendMessage() {
 
         messageDiv.innerHTML = ` <div>${message}</div> <div class="timestamp">${Timestamp}</div> `;
 
+         // Add Delete button for sent messages
+        if (sender === "me" ? "message-sent" : "message-received") {
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "🗑️";
+            deleteButton.classList.add("delete-button");
+
+            // Attach click event to delete the message
+            deleteButton.addEventListener("click", function () {
+                deleteMessage(messageDiv, currentFriend, message, Timestamp);
+            });
+
+            messageDiv.appendChild(deleteButton);
+        } 
+
+        // Append the message to the chat
         chatMessages.appendChild(messageDiv);
 
         // Scroll to the bottom of the chat area
@@ -288,3 +305,17 @@ document.getElementById("friend-name").addEventListener("keydown", function (eve
         addFriend(); // Trigger the same addFriend function as the button click
     }
 });
+
+
+// Function to handle deleting messages sent
+function deleteMessage(messageDiv, currentFriend, messageContent, Timestamp) {
+    const chatMessages = document.getElementById("chat-messages");
+
+    // Removes the message from the Dom
+    chatMessages.removeChild(messageDiv);
+
+    // Removes the message from the conversations array
+    conversations[currentFriend] = conversations[currentFriend].filter(
+        (msg) => !(msg.content === messageContent && msg.time === Timestamp)
+    );
+}
