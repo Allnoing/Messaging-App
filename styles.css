@@ -221,6 +221,15 @@ button {
 
 #friends-list li span {
     color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color0.2s ease;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#friends-list li span:hover {
+    background-color:#007bff;
+    color: white;
 }
 
 #friends-list li button {
