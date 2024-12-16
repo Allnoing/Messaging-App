@@ -319,3 +319,27 @@ function deleteMessage(messageDiv, currentFriend, messageContent, Timestamp) {
         (msg) => !(msg.content === messageContent && msg.time === Timestamp)
     );
 }
+
+// Light/Dark Mode Toggle Logic
+const themeToggle = document.getElementById("Theme-toggle");
+const body = document.body;
+
+if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark-mode");
+    themeToggle.textContent = "☀️ Light Mode";
+}
+
+
+// Event listener for the toggle button
+themeToggle.addEventListener("click", function () {
+    // Toggle the 'dark-mode' class on the body
+    body.classList.toggle("dark-mode");
+    localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
+
+    // Update button text based on current theme
+    if (body.classList.contains("dark-mode")) {
+        themeToggle.textContent = "☀️ Light Mode";
+    } else {
+        themeToggle.textContent = "🌙 Dark Mode";
+    }
+});
