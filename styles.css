@@ -82,13 +82,13 @@ button {
     gap: 10px;
 }
 
-#message-input {
+/* #message-input {
     flex-grow: 1;
     padding: 10px;
     padding: 10px;
     background-color: #f1f1f1;
     border-top: 1px solid #ddd;
-}
+} */
 
 #message-input {
     flex-grow: 1; 
@@ -108,7 +108,7 @@ button {
 
 /* Send Button Styling */
 #send-button {
-    padding: 10px 20px;
+    padding: 8px 20px;
     background-color: #007bff; 
     color: white;
     border: none;
@@ -214,6 +214,7 @@ button {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    background-color: #444;
 }
 
 #friends-list li {
@@ -303,49 +304,97 @@ body {
     transition: background-color 0.3s, color 0.3s ease;
 }
 
-/* Chat Window and Friends List */
-#chat-page, #friends-list {
+/* Chat Window*/
+#chat-page {
     background-color: #f1f1f1;
     color: #000000;
 }
 
-/* Dark Mode Styles */
+/* Dark Mode - Global Background */
 body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #1e1e1e; 
+    color: #e0e0e0; /* Light gray text */
 }
 
-/* Chat Window and Friends List in Dark Mode */
-body.dark-mode #chat-page, 
-body.dark-mode #friends-list {
+/* Dark Mode - Chat Container */
+body.dark-mode #chat-page {
     background-color: #1e1e1e;
-    color: #ffffff;
+    color: #f1f1f1;
 }
 
-/* Message Styling in Dark Mode */
+/* Dark Mode - Message Input Area */
+body.dark-mode #chat-input {
+    background-color: #1e1e1e; /* Darker input area for contrast */
+    color: #e0e0e0; /* Light text */
+    display: flex;
+    gap: 10px;
+}
+
+/* Dark Mode - Messages Container */
+body.dark-mode #chat-messages {
+    background-color: #1e1e1e; /* Dark gray background */
+    border: 1px solid #444444; /* subtle border */
+}
+
+/* Sent and Received Messages - Dark Mode */
 body.dark-mode .message-sent {
-    background-color: #007bff;
-    color: white;
+    background-color: #007bff; /* Keep sent messages blue */
+    color: #ffffff; /* White text */
 }
 
 body.dark-mode .message-received {
+    background-color: #2b2b2b; /* Darker gray for received messages */
+    color: #e0e0e0; /* Light gray text */
+}
+
+/* Input Field in Dark Mode */
+body.dark-mode #message-input {
+    background-color: #333333; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    border-radius: 20px; /* Rounded corners */
+    outline: none;
+    box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.2); /* Subtle white shadow */
+}
+
+/* Scrollbar Styling for Dark Mode */
+body.dark-mode #chat-messages::-webkit-scrollbar {
     background-color: #333333;
-    color: #e0e0e0;
+}
+
+body.dark-mode #chat-messages::-webkit-scrollbar-thumb {
+    background-color: #555555;
+    border-radius: 5px;
+}
+
+/* Dark Mode - Send Button */
+body.dark-mode #send-button {
+    background-color: #007bff; /* Keep button color blue */
+    color: white;
+    border-radius: 20px; /* Rounded corners */
+    border: none;
 }
 
 /* Toggle Button Styling */
 #theme-toggle {
-    margin: 10px;
-    padding: 8px 12px;
-    border: none;
-    background-color: #007bff;
+    position: absolute; /* Position it absolutely on the page */
+    top: 15px; 
+    right: 15px;
+    width: 40px; /* Small circular size */
+    height: 40px;
+    background-color: #007bff; /* Blue background */
     color: white;
-    border-radius: 5px;
+    border: none;
+    border-radius: 50%; /* Circular shape */
+    font-size: 1.2rem; /* Icon size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: background-color 0.3s, transform 0.2s ease;
 }
 
 #theme-toggle:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.1); /* Slight pop-out effect */
 }
