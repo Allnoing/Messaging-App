@@ -50,9 +50,12 @@ function loadConversation(friendName) {
 //  Function to get the current time in a readable format
 function getCurrentTime() {
     const now = new Date();
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    return `${hours}:${minutes}`;
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    const date = now.toDateString();
+    return `${date} ${hours}:${minutes} ${ampm}`;
 }
 
 

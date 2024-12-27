@@ -185,10 +185,18 @@ button {
 
 /* Timestamp Styling */
 .timestamp {
-    font-size: 0.75rem; /* Smaller font size */
+    font-size: 0.8rem;
     color: #666;
     text-align: right;
-    margin-top: 3px; /* spacing between message and timestamp */
+    margin-top: 5px;
+}
+
+.message-sent .timestamp {
+    margin-left: auto;
+}
+
+.message-received .timestamp {
+    margin-right: auto;
 }
 
 /* scroll bar styling for conversations */
@@ -252,14 +260,14 @@ button {
 #friend-actions {
     margin-top: 10px;
     display: flex;
-    column-gap: 20px; /* spacing between the input and button (Still not working come back to this)*/
+    column-gap: 20px; 
     flex-wrap: wrap;
     align-items: center;
 }
 
 #friend-name {
     padding: 10px;
-    flex-grow: 1; /* Ensures the input takes up remaining space */
+    flex-grow: 1; 
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -294,7 +302,7 @@ button {
 }
 
 .delete-button:hover {
-    color: red; /* Highlight in red when hovered */
+    color: red; 
 }
 
 /* Default (Light Mode) Styles */
