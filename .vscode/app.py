@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -23,5 +24,21 @@ def register():
     return jsonify({'message': 'User registered successfully!'})
 
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///yapperapp.db'
+db = SQLAlchemy(app)
+
+class User(db.Model): #user model
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<User %r>' % self.id
+
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
